@@ -9,12 +9,17 @@ public class Util {
     private static final String USER = "root";
     private static final String PASSWORD = "dell1525";
 
-    public static Connection getConnection() {
+    static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static Connection getConnection() {
+        try {
+            return DriverManager.getConnection(URL, USER, PASSWORD);
         }
         catch (SQLException e) {
             System.out.println("Connection refuse");
